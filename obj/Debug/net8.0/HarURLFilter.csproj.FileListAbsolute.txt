@@ -1,0 +1,15 @@
+C:\Users\srishtic\OneDrive - Surya Software Systems Private Limited\Desktop\HarURLFilter\HarURLFilter\bin\Debug\net8.0\HarURLFilter.exe
+C:\Users\srishtic\OneDrive - Surya Software Systems Private Limited\Desktop\HarURLFilter\HarURLFilter\bin\Debug\net8.0\HarURLFilter.deps.json
+C:\Users\srishtic\OneDrive - Surya Software Systems Private Limited\Desktop\HarURLFilter\HarURLFilter\bin\Debug\net8.0\HarURLFilter.runtimeconfig.json
+C:\Users\srishtic\OneDrive - Surya Software Systems Private Limited\Desktop\HarURLFilter\HarURLFilter\bin\Debug\net8.0\HarURLFilter.dll
+C:\Users\srishtic\OneDrive - Surya Software Systems Private Limited\Desktop\HarURLFilter\HarURLFilter\bin\Debug\net8.0\HarURLFilter.pdb
+C:\Users\srishtic\OneDrive - Surya Software Systems Private Limited\Desktop\HarURLFilter\HarURLFilter\obj\Debug\net8.0\HarURLFilter.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\srishtic\OneDrive - Surya Software Systems Private Limited\Desktop\HarURLFilter\HarURLFilter\obj\Debug\net8.0\HarURLFilter.AssemblyInfoInputs.cache
+C:\Users\srishtic\OneDrive - Surya Software Systems Private Limited\Desktop\HarURLFilter\HarURLFilter\obj\Debug\net8.0\HarURLFilter.AssemblyInfo.cs
+C:\Users\srishtic\OneDrive - Surya Software Systems Private Limited\Desktop\HarURLFilter\HarURLFilter\obj\Debug\net8.0\HarURLFilter.csproj.CoreCompileInputs.cache
+C:\Users\srishtic\OneDrive - Surya Software Systems Private Limited\Desktop\HarURLFilter\HarURLFilter\obj\Debug\net8.0\HarURLFilter.sourcelink.json
+C:\Users\srishtic\OneDrive - Surya Software Systems Private Limited\Desktop\HarURLFilter\HarURLFilter\obj\Debug\net8.0\HarURLFilter.dll
+C:\Users\srishtic\OneDrive - Surya Software Systems Private Limited\Desktop\HarURLFilter\HarURLFilter\obj\Debug\net8.0\refint\HarURLFilter.dll
+C:\Users\srishtic\OneDrive - Surya Software Systems Private Limited\Desktop\HarURLFilter\HarURLFilter\obj\Debug\net8.0\HarURLFilter.pdb
+C:\Users\srishtic\OneDrive - Surya Software Systems Private Limited\Desktop\HarURLFilter\HarURLFilter\obj\Debug\net8.0\HarURLFilter.genruntimeconfig.cache
+C:\Users\srishtic\OneDrive - Surya Software Systems Private Limited\Desktop\HarURLFilter\HarURLFilter\obj\Debug\net8.0\ref\HarURLFilter.dll
