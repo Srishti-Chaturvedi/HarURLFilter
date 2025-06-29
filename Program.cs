@@ -1,54 +1,38 @@
-﻿using System.Text.Json;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 class Program
 {
     static void Main()
     {
-        Console.Write("Enter the full path of the .har file: ");
-        string harPath = Console.ReadLine();
+        Console.Write("Enter the full path of the CSV file containing all URLs (no header): ");
+        string allUrlsCsvPath = Console.ReadLine();
 
-        if (!File.Exists(harPath))
+        if (!File.Exists(allUrlsCsvPath))
         {
-            Console.WriteLine("HAR file does not exist.");
+            Console.WriteLine("CSV file does not exist.");
             return;
         }
 
-        string allUrlsCsvPath = "./a_allUrls.csv";
         string apiUrlsCsvPath = "./b_apiFilteredUrls.csv";
         string finalFilteredCsvPath = "./c_uniqueApiFilteredUrls.csv";
+        string sortedCsvPath = "./d_sortedUrls.csv";
 
         try
         {
-            string jsonString = File.ReadAllText(harPath);
+            // Read URLs from the CSV file (no header, all lines are URLs)
+            List<string> allUrls = File.ReadAllLines(allUrlsCsvPath)
+                                       .Select(line => line.Trim('"')) // Remove surrounding quotes if any
+                                       .Where(line => !string.IsNullOrWhiteSpace(line))
+                                       .ToList();
 
-            using JsonDocument doc = JsonDocument.Parse(jsonString);
-
-            if (!doc.RootElement.TryGetProperty("log", out JsonElement logElement) ||
-                !logElement.TryGetProperty("entries", out JsonElement entriesElement))
-            {
-                Console.WriteLine("Invalid HAR file structure.");
-                return;
-            }
-
-            List<string> allUrls = new List<string>();
-
-            foreach (JsonElement entry in entriesElement.EnumerateArray())
-            {
-                if (entry.TryGetProperty("request", out JsonElement requestElement) &&
-                    requestElement.TryGetProperty("url", out JsonElement urlElement))
-                {
-                    allUrls.Add(urlElement.GetString());
-                }
-            }
-
-            // writes all the URLs to CSV
-            WriteUrlsToCsv(allUrlsCsvPath, allUrls);
-
-            // filters all URLs containing "/api"
+            // Filter URLs containing "/api"
             List<string> apiUrls = allUrls.FindAll(url => url.Contains("/api", StringComparison.OrdinalIgnoreCase));
             WriteUrlsToCsv(apiUrlsCsvPath, apiUrls);
 
-            // patterns to exclude
+            // Patterns to exclude
             string[] exclusionPatterns = new string[]
             {
                 "/hub",
@@ -58,7 +42,7 @@ class Program
                 "/errors/unknown-error"
             };
 
-            // Gives list after excluding the exclusionPatterns above
+            // Filter out URLs containing any exclusion patterns
             List<string> finalFilteredUrls = apiUrls.FindAll(url =>
                 !ContainsAny(url, exclusionPatterns));
 
@@ -73,19 +57,24 @@ class Program
                 }
                 else
                 {
-                    finalFilteredApiPaths.Add(url); //in case it didnt find /api, it adds complete url
+                    finalFilteredApiPaths.Add(url); // fallback, if no "/api" found
                 }
             }
 
-            // Removing duplicate urls
+            // Remove duplicates
             var uniqueFinalFilteredApiPaths = new HashSet<string>(finalFilteredApiPaths);
 
-            // Writing final urls
+            // Write final filtered unique URLs
             WriteUrlsToCsv(finalFilteredCsvPath, new List<string>(uniqueFinalFilteredApiPaths));
 
-            Console.WriteLine($"All URLs saved to: {allUrlsCsvPath} ({allUrls.Count} URLs)");
+            // Write sorted URLs
+            var sortedUrls = uniqueFinalFilteredApiPaths.OrderBy(url => url).ToList();
+            WriteUrlsToCsv(sortedCsvPath, sortedUrls);
+
+            Console.WriteLine($"All URLs read from: {allUrlsCsvPath} ({allUrls.Count} URLs)");
             Console.WriteLine($"/api URLs saved to: {apiUrlsCsvPath} ({apiUrls.Count} URLs)");
             Console.WriteLine($"Filtered unique /api URLs saved to: {finalFilteredCsvPath} ({uniqueFinalFilteredApiPaths.Count} unique URLs)");
+            Console.WriteLine($"Sorted unique /api URLs saved to: {sortedCsvPath} ({sortedUrls.Count} sorted URLs)");
         }
         catch (Exception ex)
         {
